@@ -44,10 +44,44 @@ const findById = async (income_id)  => {
     return boatData.boat ? boatData.boat[0] : false;
 };
 
+/**
+ * Return all boats db have.
+ */
+const allBoats = async () => {
+    const boats = await prisma.job.findMany();
+
+    return boats ? boats : false;
+}
+
+/**
+ * Filter json object using;
+ * @param {filter_param} // [brand, model, year..]
+ * @param {filter_value} // mercedes, c220, 2014
+ * job.filter( where: { boat: {path: ['brand'] , equals: 'mercedes'} } )
+ */
+
+const filterByParam = async (filter_param, filter_value ) => {
+    
+    const getBoats = await prisma.job.findMany({
+        where: {
+            boat: {
+                path: filter_param,
+                string_contains: filter_value,
+              },
+            }
+    });
+
+    console.log(getBoats)
+
+    return getBoats;
+
+}
 
 
 
 module.exports = {
     saveToDB,
-    findById
+    findById,
+    allBoats,
+    filterByParam
 }
