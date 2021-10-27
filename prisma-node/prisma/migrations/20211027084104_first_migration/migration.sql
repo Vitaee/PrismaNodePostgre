@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "Job" (
+    "id" SERIAL NOT NULL,
+    "boat" JSONB NOT NULL,
+    "saved" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Job_pkey" PRIMARY KEY ("id")
+);
