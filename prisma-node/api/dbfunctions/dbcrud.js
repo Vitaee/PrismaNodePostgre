@@ -64,15 +64,24 @@ const filterByParam = async (filter_param, filter_value ) => {
     
     const getBoats = await prisma.job.findMany({
         where: {
-            boat: {
-                path: filter_param,
-                string_contains: filter_value,
+            AND: [
+              {
+                boat: {
+                  path: [filter_param[0]],
+                  equals: filter_value[0],
+                },
               },
-            }
+              {
+                boat: {
+                  path: [filter_param[1]],
+                  string_contains: filter_value[1],
+                },
+              },
+            ],
+          },
     });
 
-    console.log(getBoats)
-
+    
     return getBoats;
 
 }

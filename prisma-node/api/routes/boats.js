@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const boatController = require('../controllers/boats');
 
-router.get('/:id',boatController.searchBoat);
-router.get('/all', boatController.returnAll);
+
+
+router.get('/filter', boatController.filterJs);
 router.post('/save', boatController.saveBoat);
-router.get('/filter=:brand&model=:model', boatController.filterJs);
-//model&year=:year&page=:page&limit=:limit&sortType=:sortType'
+router.get('/:id',boatController.byIdBoat);
+router.get('/all', boatController.returnAll);
 module.exports = router;

@@ -6,9 +6,20 @@ const returnAll = async (req, res) => {
 }
 
 const filterJs = async (req, res) => {
-    let params = req.body;
-    console.log(params);
-    res.status(200).send({'msg':'ok'})
+    let query_strings = req.query;
+    let arr_keys = [];
+    let arr_values = []
+    
+    for (let data in query_strings) {
+        arr_keys.push(data.toString())
+        arr_values.push(query_strings[data])
+    }
+
+    
+
+    const result = await filterByParam(arr_keys, arr_values)
+
+    res.status(200).send( result )
 }
 
 

@@ -58,30 +58,6 @@
 
 - ```localhost:3000/boat/save``` -> accepts **POST** request and **request.body**
 
-- body data should be;
-
-```
-{
-    "id": 8076018,
-    "url": "https://www.yachtworld.com/yacht/1996-bavaria-44-holiday-8076018/",
-    "fuel": "diesel",
-    "make": "Bavaria",
-    "model": "44 Holiday",
-    "price": 91971.37,
-    "title": "1996 Bavaria 44 Holiday",
-    "engine": "Volvo Penta",
-    "images": [
-        {
-            "url": "https://images.boatsgroup.com/resize/1/60/18/8076018_20211020085804109_1_XLARGE.jpg",
-            "date": {
-                "created": "2021-10-20T15:58:04Z",
-                "modified": "2021-10-20T16:03:37Z"
-            },
-            "format": "jpg"
-        },
-    ]
-}
-
-```
+- <a id="#Example Data">body data should be.</a>
 
 - ```localhost:3000/boat/1``` -> accepts **GET** request and parameter **id** to find row by id.

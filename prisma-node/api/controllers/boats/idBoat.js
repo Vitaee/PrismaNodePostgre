@@ -3,6 +3,7 @@ const { findById } = require('../../dbfunctions/dbcrud')
 module.exports = async (req, res) => {
     try {
         let { id } = req.params;
+    
         let boat = await findById(parseInt(id))
         res.status(200).send( boat )
 
