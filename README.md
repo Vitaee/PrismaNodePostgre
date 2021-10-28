@@ -58,6 +58,6 @@
 
 - ```localhost:3000/boat/save``` -> accepts **POST** request and **request.body**
 
-- <a id="#Example Data">body data should be.</a>
+- <a id="example-data" href="#example-data" >body data should be.</a>
 
 - ```localhost:3000/boat/1``` -> accepts **GET** request and parameter **id** to find row by id.
