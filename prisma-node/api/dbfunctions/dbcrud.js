@@ -18,7 +18,7 @@ const saveToDB = async (income_data) => {
 
     const boat_data = await prisma.job.create({
         data: {
-            boat: [ income_data ],
+            boat: income_data,
         }
     });
 
@@ -61,28 +61,63 @@ const allBoats = async () => {
  */
 
 const filterByParam = async (filter_param, filter_value ) => {
+
+  var query;
+  if (filter_param.length == 2) { 
+    query = 
+    { 
+      where: {
+        AND: 
+        [ 
+            { 
+              boat: { path: [filter_param[0]],equals: filter_value[0],},
+            },
+            
+            {
+              boat: { path: [filter_param[1]], string_contains: filter_value[1],},
+            },
+        ]
+          
+            }
+  
+    }
+  } else if (filter_param.length == 3){
+    query = 
+    { 
+      where: {
+        AND: 
+        [ 
+            { 
+              boat: { path: [filter_param[0]],equals: filter_value[0],},
+            },
+            
+            {
+              boat: { path: [filter_param[1]], string_contains: filter_value[1],},
+            },
+
+            {
+              boat: { path: [filter_param[2]], string_contains: filter_value[2],},
+            },
+        ]
+          
+            }
+  
+    }
+
+  } else {
+
+    query = { 
+      where: {
+        boat: { path: [ filter_param[0] ], equals: filter_value[0] }
+      }
+    }
+
+  }
     
-    const getBoats = await prisma.job.findMany({
-        where: {
-            AND: [
-              {
-                boat: {
-                  path: [filter_param[0]],
-                  equals: filter_value[0],
-                },
-              },
-              {
-                boat: {
-                  path: [filter_param[1]],
-                  string_contains: filter_value[1],
-                },
-              },
-            ],
-          },
-    });
+  const getBoats = await prisma.job.findMany(query);
 
     
-    return getBoats;
+  return getBoats;
 
 }
 
