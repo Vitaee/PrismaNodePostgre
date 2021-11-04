@@ -1,10 +1,11 @@
 
 const saveBoat = require('./registerBoat');
-const byIdBoat = require('./idBoat');
+const {getBoatById, deleteBoatById } = require('./idBoat');
 const {returnAll, filterJs} = require('./filterBoat');
 module.exports = {
     saveBoat:saveBoat,
-    byIdBoat:byIdBoat,
+    getBoatById:getBoatById,
+    deleteBoatById:deleteBoatById,
     returnAll:returnAll,
     filterJs:filterJs
 }

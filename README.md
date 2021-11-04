@@ -23,6 +23,7 @@
 
 - Check schema.prisma to see **prismatic** version. 
 
+
 ### Example Data
 - The **boat** variable store this object. 
 
@@ -49,6 +50,7 @@
 }
 ```
 
+
 ### Routes 
 
 - Check **routes** folder to see more information.
@@ -61,3 +63,41 @@
 - <a id="example-data" href="#example-data" >body data should be.</a>
 
 - ```localhost:3000/boat/1``` -> accepts **GET** request and parameter **id** to find row by id.
+
+### Setup PostgreSQL via Docker
+
+- Firstly, run this command with your credentials; ```docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres```
+
+- If you don't have docker you can install it from [here](https://docs.docker.com/get-docker/).
+
+- Check your container via ``` docker ps ``` this will return a container ID (the first 12 characters from the hash), the image name (in this case, postgres), command, created, status, ports and the name of the container (some-postgres).
+
+- Then download the ( GUI tool ) [pgadmin4](https://www.pgadmin.org/download/).
+
+- Create server from pgadmin4 gui tool. In connection tab you should provide your ```IPAddress``` to connect our postgreSQL db. 
+
+- ``` docker inspect some-postgres``` with this commend you will get output like this;
+
+```
+ "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID":"",
+                    "EndpointID": "",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                }
+            }
+```
+
+- Copy the ``` IPAddress ``` and in pgadmin4 enter Ip address to Host section. Finally enter your password and click save  ( check example [image](https://i.stack.imgur.com/K9NtY.png) ). Congracts you're connected to your db!
+
+- If you are using Linux / MacOS assume that you're writing ```sudo``` before ```docker``` commands.

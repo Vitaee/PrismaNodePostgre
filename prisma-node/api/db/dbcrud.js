@@ -58,6 +58,7 @@ const allBoats = async () => {
  * @param {filter_param} // [brand, model, year..]
  * @param {filter_value} // mercedes, c220, 2014
  * job.filter( where: { boat: {path: ['brand'] , equals: 'mercedes'} } )
+ * accepts max. 3 filter params.
  */
 
 const filterByParam = async (filter_param, filter_value ) => {
@@ -121,11 +122,22 @@ const filterByParam = async (filter_param, filter_value ) => {
 
 }
 
+const deleteById = async (id) => {
+  await prisma.job.delete({
+    where: {
+      id: id
+    }
+  });
+
+  return {"msg":"Record deleted."}
+}
+
 
 
 module.exports = {
     saveToDB,
     findById,
     allBoats,
-    filterByParam
+    filterByParam,
+    deleteById
 }

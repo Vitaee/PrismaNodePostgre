@@ -1,4 +1,4 @@
-const { saveToDB } = require('../../dbfunctions/dbcrud')
+const { saveToDB } = require('../../db/dbcrud')
 
 module.exports = async (req, res) => {
     

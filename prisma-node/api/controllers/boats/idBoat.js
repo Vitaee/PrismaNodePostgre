@@ -1,6 +1,6 @@
-const { findById } = require('../../dbfunctions/dbcrud')
+const { findById, deleteById } = require('../../db/dbcrud');
 
-module.exports = async (req, res) => {
+const getBoatById = async (req, res) => {
     try {
         let { id } = req.params;
     
@@ -10,4 +10,21 @@ module.exports = async (req, res) => {
     } catch (err) {
         return res.status(500).send({'info': 'Unexpected error while getting data from db.'})
     }
+};
+
+const deleteBoatById = async (req, res) => {
+    try {
+        let { id } = req.params;
+
+        let response = await deleteById(id);
+
+        res.status(200).send( response )
+    } catch (err) {
+        return res.status(500).send({'info': 'Unexpected error while deleting data from db.'})
+    }
+}
+
+module.exports = {
+    getBoatById,
+    deleteBoatById
 }

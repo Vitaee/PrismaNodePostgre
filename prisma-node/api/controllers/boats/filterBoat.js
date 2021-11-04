@@ -1,4 +1,4 @@
-const {allBoats , filterByParam } = require('../../dbfunctions/dbcrud');
+const {allBoats , filterByParam } = require('../../db/dbcrud');
 
 const returnAll = async (req, res) => {
     let saved_data = await allBoats();
