@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 
@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
  * }
 */
 
-const saveToDB = async (income_data) => {
+export const saveToDB = async (income_data: any) => {
 
     const boat_data = await prisma.job.create({
         data: {
@@ -33,24 +33,29 @@ const saveToDB = async (income_data) => {
  * then return the result.
  * @param {income_id}
 */
-const findById = async (income_id)  => {
+export const findById = async (income_id: any)  => {
 
     const boatData = await prisma.job.findFirst({
         where: {
-          id: income_id,
+          id: 1,
         },
     });
         
-    return boatData.boat ? boatData.boat[0] : false;
+    return boatData?.boat ? boatData.boat[0] : false;
 };
 
 /**
  * Return all boats db have.
  */
-const allBoats = async () => {
-    const boats = await prisma.job.findMany();
+export const allBoats = async () => {
+    try {
+      const boats = await prisma.job.findMany();
 
-    return boats ? boats : false;
+      return boats ? boats : false;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
 }
 
 /**
@@ -61,7 +66,7 @@ const allBoats = async () => {
  * accepts max. 3 filter params.
  */
 
-const filterByParam = async (filter_param, filter_value ) => {
+export const filterByParam = async (filter_param: any, filter_value: any ) => {
 
   var query;
   if (filter_param.length == 2) { 
@@ -122,7 +127,7 @@ const filterByParam = async (filter_param, filter_value ) => {
 
 }
 
-const deleteById = async (id) => {
+export const deleteById = async (id: any) => {
   await prisma.job.delete({
     where: {
       id: id

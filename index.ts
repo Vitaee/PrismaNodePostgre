@@ -1,8 +1,8 @@
-const express = require("express");
-const morgan = require('morgan');
+import express from "express";
+import morgan from 'morgan';
 
 const app = express();
-const routes = require('./api/routes');
+import routes from './api/routes';
 
 process.on('uncaughtException', (error) => {
 	console.log(error);
@@ -30,10 +30,10 @@ app.use((req, res, next) => {
 
 });
 
+app.use('/', routes);
+
 const port = process.env.PORT || "3000";
 
 app.listen(port, () => {
   console.log(`Server Running at ${port} 🚀`);
 });
-
-app.use('/', routes);
