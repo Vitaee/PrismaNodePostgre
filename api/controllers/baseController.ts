@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
 import BaseService from "../services/baseService";
-import BaseModel from "db/baseModel";
+import BaseModel from "models/baseModel";
 
 
 class BaseController<T extends BaseService<BaseModel>> {

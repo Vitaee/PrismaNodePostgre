@@ -1,4 +1,4 @@
-import BaseModel from '../db/baseModel';
+import BaseModel from './baseModel';
 
 class BoatModel extends BaseModel {
   constructor() {

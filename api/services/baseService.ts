@@ -1,4 +1,4 @@
-import BaseModel from "../db/baseModel";
+import BaseModel from "../models/baseModel";
 
 
 class BaseService<T extends BaseModel> {
