@@ -1,9 +1,9 @@
-import BoatModel from "../models/boatModel";
-import BaseService from "./baseService";
-
+import BaseService from './baseService';
+import BoatModel from '../models/boatModel';
 
 export default class BoatService extends BaseService<BoatModel> {
   constructor() {
-    super(BoatModel);
+    super(new BoatModel());
   }
+  
 }

@@ -1,54 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 
-class BaseModel {
-  prisma: PrismaClient;
-  protected modelName: string = 'test'
+export default abstract class BaseModel {
+  protected prisma: PrismaClient;
 
-  constructor(modelName: string) {
-    this.modelName = modelName
-    this.prisma =  new PrismaClient();
-  }
-  
-  async findAll() {
-    return await this.prisma.job.findMany();
+  constructor() {
+    this.prisma = new PrismaClient();
   }
 
-  async search(data: any) {
-    return await this.prisma.job.findMany( { where: data } );
-  }
-
-  async findById(id: number) {
-    return await this.prisma.job.findFirst({
-      where: {
-        id: 1,
-      },
-    });
-  }
-
-  async create(data: object) {
-    return await this.prisma.job.create({
-      data: {
-        boat: data,
-      },
-    });
-  }
-
-  async delete(id: number) {
-    return await this.prisma.job.delete({
-      where: {
-        id: id,
-      },
-    });
-  }
-
-  async update(id: any,data: object) {
-    return await this.prisma.job.update({
-      where: {
-        id: id,
-      },
-      data: data,
-    })
-  }
+  abstract  create(data: any): Promise<any>;
+  abstract  getAll(): Promise<any[]>;
+  abstract  search(data: any): Promise<any>;
+  abstract  getById(id: number): Promise<any | null>;
+  abstract  update(id: number, data: any): Promise<any | null>;
+  abstract  delete(id: number): Promise<void>;
 }
-
-export default BaseModel;

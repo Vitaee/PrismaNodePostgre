@@ -1,43 +1,33 @@
-import BaseModel from "../models/baseModel";
+import BaseModel from '../models/baseModel';
 
+export default abstract class BaseService<T extends BaseModel> {
+  protected model: T;
 
-class BaseService<T extends BaseModel> {
-  
-  model: typeof BaseModel & { new(): T };
-  static model: BaseModel;
-
-  constructor(model: typeof BaseModel & { new(): T }) {
+  constructor(model: T) {
     this.model = model;
   }
 
-  static async getAll() {
-    return await this.model.findAll();
-  }
-
-  static async search(data: any) {
-    return await this.model.search(data);
-  }
-
-  static async getById(id: number) {
-    return await this.model.findById(id);
-  }
-
-  static async create(data: object) {
+  async create(data: any): Promise<any> {
     return await this.model.create(data);
   }
 
-  static async update(id: number, data: object) {
-    const existingData = await this.model.findById(id);
-    if (!existingData) {
-      return null;
-    }
-    return this.model.update(id, data);
+  async search(data: any) {
+    return await this.model.search(data);
+  }
+  
+  async getAll(): Promise<any[]> {
+    return await this.model.getAll();
   }
 
-  static async delete(id: number) {
-      return this.model.delete(id)
+  async getById(id: number): Promise<any | null> {
+    return await this.model.getById(id);
   }
 
+  async update(id: number, data: any): Promise<any | null> {
+    return await this.model.update(id, data);
+  }
+
+  async delete(id: number): Promise<void> {
+    return await this.model.delete(id);
+  }
 }
-
-export default BaseService;

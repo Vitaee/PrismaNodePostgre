@@ -1,8 +1,8 @@
 import express from "express";
 import morgan from 'morgan';
+import routes from './api/routes';
 
 const app = express();
-import routes from './api/routes';
 
 process.on('uncaughtException', (error) => {
 	console.log(error);
