@@ -1,24 +1,24 @@
 import { PrismaClient } from '@prisma/client';
 
 class BaseModel {
-  protected prisma: PrismaClient;
-  protected modelName: string;
+  prisma: PrismaClient;
+  protected modelName: string = 'test'
 
   constructor(modelName: string) {
-    this.prisma = new PrismaClient();
-    this.modelName = modelName;
+    this.modelName = modelName
+    this.prisma =  new PrismaClient();
   }
-
+  
   async findAll() {
-    return await this.prisma[this.modelName].findMany();
+    return await this.prisma.job.findMany();
   }
 
   async search(data: any) {
-    return await this.prisma[this.modelName].findMany( { where: data } );
+    return await this.prisma.job.findMany( { where: data } );
   }
 
   async findById(id: number) {
-    return await this.prisma[this.modelName].findFirst({
+    return await this.prisma.job.findFirst({
       where: {
         id: 1,
       },
@@ -26,7 +26,7 @@ class BaseModel {
   }
 
   async create(data: object) {
-    return await this.prisma[this.modelName].create({
+    return await this.prisma.job.create({
       data: {
         boat: data,
       },
@@ -34,11 +34,20 @@ class BaseModel {
   }
 
   async delete(id: number) {
-    return await this.prisma[this.modelName].delete({
+    return await this.prisma.job.delete({
       where: {
         id: id,
       },
     });
+  }
+
+  async update(id: any,data: object) {
+    return await this.prisma.job.update({
+      where: {
+        id: id,
+      },
+      data: data,
+    })
   }
 }
 

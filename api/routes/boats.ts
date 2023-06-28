@@ -2,9 +2,9 @@ import express from "express";
 import BoatController from "../controllers/boatController";
 
 
-const boatController = new BoatController();
 const router = express.Router();
 
+const boatController = new BoatController();
 
 router.get('/', boatController.GetAll);
 router.get('/filter', boatController.Search);

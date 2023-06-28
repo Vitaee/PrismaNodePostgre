@@ -2,37 +2,39 @@ import BaseModel from "../models/baseModel";
 
 
 class BaseService<T extends BaseModel> {
-  protected model: T;
+  
+  model: typeof BaseModel & { new(): T };
+  static model: BaseModel;
 
-  constructor(model: new () => T) {
-    this.model = new model();
+  constructor(model: typeof BaseModel & { new(): T }) {
+    this.model = model;
   }
 
-  async getAll() {
+  static async getAll() {
     return await this.model.findAll();
   }
 
-  async search(data: any) {
+  static async search(data: any) {
     return await this.model.search(data);
   }
 
-  async getById(id: number) {
+  static async getById(id: number) {
     return await this.model.findById(id);
   }
 
-  async create(data: object) {
+  static async create(data: object) {
     return await this.model.create(data);
   }
 
-  async update(id: number, data: object) {
+  static async update(id: number, data: object) {
     const existingData = await this.model.findById(id);
     if (!existingData) {
       return null;
     }
-    return existingData.update(data);
+    return this.model.update(id, data);
   }
 
-  async delete(id: number) {
+  static async delete(id: number) {
       return this.model.delete(id)
   }
 
