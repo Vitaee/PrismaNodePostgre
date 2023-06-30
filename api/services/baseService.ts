@@ -19,8 +19,8 @@ export default abstract class BaseService<T extends BaseModel> {
     return await this.model.getAll();
   }
 
-  async getById(id: number): Promise<any | null> {
-    return await this.model.getById(id);
+  async get(key: any, value: any): Promise<any | null> {
+    return await this.model.get(key, value);
   }
 
   async update(id: number, data: any): Promise<any | null> {

@@ -10,7 +10,7 @@ export default abstract class BaseModel {
     this.modelName = modelName
     this.models = {
       job: this.prisma.job,
-      user: this.prisma.user,
+      user: this.prisma.user
     };
   }
   
@@ -37,9 +37,11 @@ export default abstract class BaseModel {
     return await model.findMany();
   }
 
-  async getById(id: number): Promise<any | null> {
+  async get(key: any, value: any): Promise<any | null> {
     const model = this.getModel(this.modelName);
-    return await model.findUnique({ where: { id } });
+    const whereClause: Record<string, any> = {};
+    whereClause[key] = value;
+    return await model.findUnique({ where: whereClause });
   }
 
   async update(id: number, data: any): Promise<any | null> {
