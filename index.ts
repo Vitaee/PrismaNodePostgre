@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from 'morgan';
-import routes from './api/routes';
+import userRouter from './api/routes/user';
+import boatRouter from "./api/routes/boats";
 
 const app = express();
 
@@ -30,7 +31,8 @@ app.use((req, res, next) => {
 
 });
 
-app.use('/', routes);
+app.use('/', boatRouter);
+app.use('/', userRouter);
 
 const port = process.env.PORT || "3000";
 

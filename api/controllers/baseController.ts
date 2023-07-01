@@ -38,7 +38,7 @@ export default abstract class BaseController<T extends BaseService<BaseModel>> {
   Get = async (req: Request, res: Response): Promise<void> => {
     try {
       const id = parseInt(req.params.id);
-      const result = await this.service.getById(id);
+      const result = await this.service.get('id', id);
       if (result) {
         res.status(200).json(result);
       } else {
@@ -73,4 +73,5 @@ export default abstract class BaseController<T extends BaseService<BaseModel>> {
       res.status(500).json({ error: error.message });
     }
   }
+  
 }
