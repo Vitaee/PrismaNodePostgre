@@ -1,4 +1,5 @@
 import express from "express";
+import { Request, Response } from "express";
 import morgan from 'morgan';
 import userRouter from './api/routes/user';
 import boatRouter from "./api/routes/boats";
@@ -34,10 +35,14 @@ app.use((req, res, next) => {
 app.use('/', boatRouter);
 app.use('/', userRouter);
 
+app.get('/', async (req: Request, res: Response): Promise<Response> => {
+    return res.status(200).send({ msg: 'Express server with TypeScript!' });
+});
+
 const port = process.env.PORT || "3000";
 
 app.listen(port, () => {
-  console.log(`Server Running at ${port} 🚀`);
+	console.log(`Server Running at ${port} 🚀`);
 });
 
 export default app;
